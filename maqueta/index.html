@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charcutería Padilla. Las recetas de Juan Padilla Agut</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="rotulo">
+  <div class="caja">
+    <a class="marca" href="index.html">Charcutería Padilla</a>
+    <nav aria-label="Secciones">
+      <a href="#recetas">Recetas</a>
+      <a href="#proveedor">Proveedor</a>
+      <a href="#etiquetas">Etiquetas</a>
+      <a href="oficio.html">El oficio</a>
+      <a href="#parada">La parada</a>
+    </nav>
+  </div>
+</header>
+
+<div class="portada">
+  <img src="img/parada2.jpg" alt="El mostrador de la parada, con los embutidos colgados y la báscula.">
+  <div class="titulo">
+    <div class="caja">
+      <h1>Charcutería Padilla</h1>
+      <p>Las recetas de Juan Padilla Agut, charcutero. Material reunido por Francisca Julián Querol.</p>
+      <div class="cuentas">
+        <span class="precio"><b>10</b><small>recetas de casa</small></span>
+        <span class="precio"><b>16</b><small>hojas del proveedor</small></span>
+        <span class="precio"><b>9</b><small>etiquetas</small></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+<section id="recetas">
+  <div class="caja">
+    <h2>Recetas de casa</h2>
+    <p class="entradilla">Diez papeles manuscritos. En tinta azul, la fórmula; en tinta roja y en valenciano, cómo se hacía. El óvalo marca los gramos de aditivos por kilo de masa, sal incluida.</p>
+    <div class="fichas" id="fichas"></div>
+  </div>
+</section>
+
+<section id="proveedor">
+  <div class="caja">
+    <h2>Hojas del proveedor</h2>
+    <p class="entradilla">Instrucciones de fabricación mecanografiadas que entregaba la casa de especias, una por cada mezcla.</p>
+    <div class="hoja">
+      <p class="membrete">"CEYLAMIX"</p>
+      <p class="igual" aria-hidden="true">========================</p>
+      <ol class="indice" id="indice"></ol>
+    </div>
+  </div>
+</section>
+
+<section id="etiquetas">
+  <div class="caja">
+    <h2>Etiquetas</h2>
+    <p class="entradilla">Las pegatinas de los botes de especias. Cada una lleva la dosis máxima por kilo de masa y la composición.</p>
+    <div class="pegatinas" id="pegatinas"></div>
+  </div>
+</section>
+
+<section id="parada">
+  <div class="caja">
+    <h2>La parada</h2>
+    <p class="entradilla">Fotos del punto de venta. Proceden de «El mercat de Sant Antoni», de la misma autora.</p>
+    <div class="fotos">
+      <figure class="foto ancha"><img src="img/parada9.jpg" alt="La parada vista de frente, con tres personas detrás de la vitrina y una clienta." loading="lazy"><figcaption>Sin pie en el original.</figcaption></figure>
+      <figure class="foto"><img src="img/parada1.jpg" alt="Una mujer joven atiende a una clienta en la parada." loading="lazy"><figcaption><em>«Paquita la de Padilla 1967. Clienta: Teresa La Mascarosa».</em></figcaption></figure>
+      <figure class="foto"><img src="img/parada3.jpg" alt="Una mujer despacha junto a la báscula, entre embutidos colgados." loading="lazy"><figcaption>Sin pie en el original.</figcaption></figure>
+      <figure class="foto"><img src="img/parada4.jpg" alt="Un hombre sonríe tras el mostrador mientras una clienta señala los quesos." loading="lazy"><figcaption>Sin pie en el original.</figcaption></figure>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="caja">
+    <p>Charcutería Padilla. Las recetas de Juan Padilla Agut. Autora: Francisca Julián Querol.</p>
+    <p>Las hojas y las etiquetas del proveedor son material de terceros; su licencia está por decidir.</p>
+  </div>
+</footer>
+
+<script src="datos.js"></script>
+<script>
+const g = (n) => n.toLocaleString("es-ES");
+document.getElementById("fichas").innerHTML = RECETAS.filter(r => r.tipo === "casa").map(r => `
+  <a class="ficha" href="receta.html?r=${r.id}">
+    <img src="img/${r.papel}.jpg" alt="Papel manuscrito de la receta «${r.titulo}»." loading="lazy">
+    <div class="pie">
+      <div>
+        <h3>${r.titulo}</h3>
+        <p class="formula">${r.formula.map(([n, p]) => `${n} ${p} %`).join(" · ")}</p>
+      </div>
+      <span class="precio" title="Aditivos por kilo de masa, sal incluida"><b>${g(r.aditivos)}</b><small>g / kg</small></span>
+    </div>
+  </a>`).join("");
+
+document.getElementById("indice").innerHTML = PROVEEDOR.map(([n, t, gama, id]) => `
+  <li><span class="n">${n}</span>
+    <span class="t">${id ? `<a href="receta.html?r=${id}">${t}</a>` : t}</span>
+    <span class="puntos" aria-hidden="true"></span>
+    <span class="g">${gama || ""}</span></li>`).join("");
+
+document.getElementById("pegatinas").innerHTML = Object.entries(ETIQUETAS).map(([n, e]) => `
+  <figure class="pegatina">
+    <img src="img/etiqueta${n}.jpg" alt="Etiqueta Ceylan: ${e.nombre}." loading="lazy">
+    <figcaption><b>${e.nombre}</b>${e.dosis ? `Dosis máxima: ${e.dosis} g por kilo` : "Especia suelta, 1 kg"}</figcaption>
+  </figure>`).join("");
+</script>
+</body>
+</html>

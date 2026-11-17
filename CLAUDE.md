@@ -20,7 +20,9 @@ Material de partida, escaneado por el usuario:
 
 Los puntos 1 y 3 son material de terceros: afecta a la licencia (T-03).
 
-**Estado: recién creado (2026-11-17).** Solo en local; no hay repositorio en GitHub todavía (T-04).
+**Estado: primera maqueta publicada (2026-11-17).** Repositorio: `jtpadilla/charcuteriapadilla`
+(público). Sitio: <https://jtpadilla.github.io/charcuteriapadilla/>, que es la carpeta `maqueta/`
+desplegada por `.github/workflows/deploy.yml` en cada push a `main`.
 
 Idioma de trabajo con el usuario: **castellano**. Idiomas del sitio: por decidir (T-05).
 
@@ -42,6 +44,9 @@ reinventar decisiones.
 
 ```
 raw/        bandeja de entrada de los escaneos. No se versiona hasta resolver T-02.
+maqueta/    maqueta estática del sitio (HTML + CSS + datos.js); se abre `maqueta/index.html`.
+            `maqueta/img/` son recortes derivados de `raw/`; se regeneran con `tools/maqueta_img.sh`.
+tools/      scripts de apoyo.
 NOTES.md    hallazgos y decisiones.
 TODO.md     tareas numeradas T-nn; se citan en los commits al resolverlas.
 ```

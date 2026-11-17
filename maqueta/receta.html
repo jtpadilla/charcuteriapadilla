@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receta · Charcutería Padilla</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="rotulo">
+  <div class="caja">
+    <a class="marca" href="index.html">Charcutería Padilla</a>
+    <nav aria-label="Secciones">
+      <a href="index.html#recetas">Recetas</a>
+      <a href="index.html#proveedor">Proveedor</a>
+      <a href="index.html#etiquetas">Etiquetas</a>
+      <a href="oficio.html">El oficio</a>
+      <a href="index.html#parada">La parada</a>
+    </nav>
+  </div>
+</header>
+
+<main class="caja" id="receta"></main>
+
+<footer>
+  <div class="caja">
+    <p>Charcutería Padilla. Las recetas de Juan Padilla Agut. Autora: Francisca Julián Querol.</p>
+    <p>Las hojas y las etiquetas del proveedor son material de terceros; su licencia está por decidir.</p>
+  </div>
+</footer>
+
+<script src="datos.js"></script>
+<script>
+// Texto de las hojas del proveedor ya transcritas (el resto está pendiente).
+const HOJAS = {
+  "longaniza-aragon-033": `
+    <h2>Preparación de carnes</h2><hr class="raya">
+    <p>Escoger el magro, la panceta y los recortes limpios y pasarlo a la cámara a −2 °C.</p>
+    <h2>Dosificación masa</h2><hr class="raya">
+    <ul class="lineas">
+      <li><span>3 kg de magro</span><span class="puntos"></span><span class="v">a 0 °C</span></li>
+      <li><span>2 kg de panceta y recortes</span><span class="puntos"></span><span class="v">a −2 °C</span></li>
+      <li><span>0,350 kg de CEYLAMIX n.º 033, o sea, 70 g por kg de masa</span></li>
+      <li><span class="tachado">0,005 de PAKERS POWDER CH-C</span></li>
+    </ul>
+    <p class="aviso">La última línea está tachada a bolígrafo azul en el original. Los kilos de magro y de panceta se leen mal; cuadran con los 0,350 kg de mezcla a 70 g por kilo.</p>
+    <h2>Fabricación</h2><hr class="raya">
+    <p>Picar con placa de 8 o 10 milímetros, mezclándolo, el magro y la panceta y los recortes. Pasarlo a la amasadora y agregarle el CEYLAMIX n.º 033, en forma de papilla hecha con agua fría y un gramo de Jerez por kilo de masa. Amasar durante 5 o 6 minutos al 60 de vacío, si se tiene, y dejar la masa en la cámara a +2 °C durante 24 horas. Transcurrido este tiempo proceder a embutir en tripa china de cerdo, calibre 34-36.</p>
+    <p>A continuación debe colgarse en lugar cerrado o en habitación de estufaje, con temperatura de +18 °C a +20 °C y 85-90 % de humedad, durante 24 horas. Posteriormente pasarlo a lugar más aireado o secadero artificial con humedad relativa del 70-75 %.</p>
+    <p>Debe evitarse toda corriente directa de aire.</p>`
+};
+
+const fmt = (n, d = 0) => n.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
+const id = new URLSearchParams(location.search).get("r") || "sobrasada";
+const i = Math.max(0, RECETAS.findIndex(r => r.id === id));
+const r = RECETAS[i];
+const casa = r.tipo === "casa";
+document.title = `${r.titulo} · Charcutería Padilla`;
+
+const lineas = r.formula.map(([n, p]) =>
+  `<li><span>${n}</span><span class="puntos"></span><span class="v">${p} %</span></li>`).join("");
+
+const cuerpo = casa ? `
+    <h2>Fórmula <span class="tinta-azul">· tinta azul</span></h2><hr class="raya">
+    <ul class="lineas">${lineas}
+      <li><span>Aditivos, sal incluida</span><span class="puntos"></span><span class="v">${r.aditivos} g por kg</span></li>
+    </ul>
+    <h2>Elaboración <span class="tinta-roja">· tinta roja, en valenciano</span></h2><hr class="raya">
+    <p class="nota-roja" lang="ca">«${r.nota}»</p>
+    <p class="nota-es">${r.notaEs}</p>
+    ${r.aviso ? `<p class="aviso">${r.aviso}</p>` : ""}` : HOJAS[r.id];
+
+const e = r.etiqueta && ETIQUETAS[r.etiqueta.n];
+const pegada = e ? `
+  <div class="pegada">
+    <img src="img/etiqueta${r.etiqueta.n}.jpg" alt="Etiqueta Ceylan: ${e.nombre}.">
+    <p>
+      <span class="sello ${r.etiqueta.vinculo}">${r.etiqueta.vinculo === "seguro" ? "Coinciden nombre y dosis" : "Coincide la dosis · por confirmar"}</span><br>
+      <b>${e.nombre}</b><br>
+      ${e.gama}. Dosis máxima: ${e.dosis} g por kilo de masa.
+    </p>
+  </div>` : "";
+
+const ant = RECETAS[(i - 1 + RECETAS.length) % RECETAS.length];
+const sig = RECETAS[(i + 1) % RECETAS.length];
+
+document.getElementById("receta").innerHTML = `
+  <p class="miga"><a href="index.html">Portada</a> / ${casa ? "Recetas de casa" : "Hojas del proveedor"}</p>
+  <div class="cab-receta">
+    <p class="clase">${casa ? "Receta de casa · manuscrito" : `Hoja del proveedor · ${r.gama}`}</p>
+    <h1>${r.titulo}</h1>
+  </div>
+  <div class="pestanas" role="group" aria-label="Qué ver">
+    <button type="button" data-ver="receta" aria-pressed="true">La receta</button>
+    <button type="button" data-ver="papel" aria-pressed="false">El papel</button>
+  </div>
+  <div class="dos" data-ver="receta">
+    <div class="lado-papel">
+      <figure>
+        <a href="img/${r.papel}.jpg"><img src="img/${r.papel}.jpg" alt="Escaneo del original de «${r.titulo}»."></a>
+        <figcaption>El papel original. Pulsa para verlo a tamaño completo.</figcaption>
+      </figure>
+      ${pegada}
+    </div>
+    <div class="lado-receta">
+      <div class="transcrita">${cuerpo}</div>
+      <div class="bascula">
+        <h2>La báscula</h2>
+        <label>Kilos de masa <input id="kg" type="number" min="0.5" step="0.5" value="5" inputmode="decimal"></label>
+        <ul class="lineas tique" id="tique" aria-live="polite"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="otras">
+    <a href="receta.html?r=${ant.id}">← ${ant.titulo}</a>
+    <a href="receta.html?r=${sig.id}">${sig.titulo} →</a>
+  </div>`;
+
+const kg = document.getElementById("kg");
+function pesar() {
+  const k = Math.max(0, parseFloat(kg.value) || 0);
+  const fila = (n, v) => `<li><span>${n}</span><span class="puntos"></span><span class="v">${v}</span></li>`;
+  document.getElementById("tique").innerHTML =
+    r.formula.map(([n, p]) => fila(n, `${fmt(k * p / 100, 2)} kg`)).join("") +
+    fila(casa ? "Aditivos, sal incluida" : "Mezcla de especias", `${fmt(k * r.aditivos)} g`) +
+    (r.extra || []).map(([n, gkg]) => fila(n, `${fmt(k * gkg)} g`)).join("") +
+    `<li class="total"><span>Masa</span><span class="puntos"></span><span class="v">${fmt(k, 2)} kg</span></li>`;
+}
+kg.addEventListener("input", pesar);
+pesar();
+
+const dos = document.querySelector(".dos");
+document.querySelectorAll(".pestanas button").forEach(b => b.addEventListener("click", () => {
+  dos.dataset.ver = b.dataset.ver;
+  document.querySelectorAll(".pestanas button").forEach(x => x.setAttribute("aria-pressed", x === b));
+}));
+</script>
+</body>
+</html>
