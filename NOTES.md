@@ -98,3 +98,13 @@
   reducidos). Los escaneos completos de `raw/` siguen fuera del repositorio (T-02).
 - Queda publicado material de terceros (hojas y etiquetas de Ceylan) sin licencia decidida: T-03
   sigue abierta y el repositorio no tiene todavía fichero de licencia.
+
+## 2026-11-17 — Identificación en las fotos de la parada (T-09, parcial)
+
+- El usuario identifica al hombre de `parada4.jpg` (image4), tras el mostrador, como **Juan Padilla
+  Agut**. El pie de la maqueta pasa de «Sin pie en el original» a «Juan Padilla Agut, en la parada»;
+  es una identificación del usuario, no un pie de la obra original.
+- En `parada9.jpg` (image9), tras la vitrina y de izquierda a derecha: **Juan Padilla Agut, Manuel
+  Padilla Julián y Paquita** (Francisca Julián Querol). También es identificación del usuario. El
+  usuario escribió «Julian»; se pone la tilde por coherencia con el apellido de la autora.
+- Siguen sin identificar las clientas, los años de todas, y las personas de image2 y 3.

@@ -10,7 +10,7 @@
 - **T-07** Revisar en franciscaineditos las obras C19 y C22 por si hay material relacionado.
 - **T-08** Preguntar: nombre comercial de la charcutería, lugar y años de actividad.
 - **T-09** Fotos de la parada (`raw/FotosParada/`): preguntar quién sale y de qué año son las que no
-  tienen pie (image2, 3, 4 y 9), y si hay escaneos con más resolución que los extraídos del Word.
+  tienen pie (image2, 3, 4 y 9; ya identificadas las personas de la 4 y la 9, faltan los años), y si hay escaneos con más resolución que los extraídos del Word.
 - **T-10** Revisar en franciscaineditos las copias 220 y 178 de «El mercat de Sant Antoni» por si
   tienen más fotos de la parada.
 - **T-11** Preguntar por la fotocopia de la factura de Ceylan que cita `manual02` (no está en `raw/`)
