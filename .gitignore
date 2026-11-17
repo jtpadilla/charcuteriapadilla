@@ -1,0 +1,20 @@
+# IDE y sistema
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python (tools/)
+__pycache__/
+*.log
+
+# raw/ es la bandeja de entrada de los escaneos. Hasta decidir cómo se versionan (T-02),
+# lo que haya dentro no entra en el repo; solo se conserva la carpeta (.gitkeep).
+raw/*
+!raw/.gitkeep
+
+# Astro (site/), cuando exista
+site/node_modules/
+site/dist/
+site/.astro/
