@@ -30,25 +30,21 @@
 </footer>
 
 <script src="datos.js"></script>
+<script src="hojas.js"></script>
 <script>
-// Texto de las hojas del proveedor ya transcritas (el resto está pendiente).
-const HOJAS = {
-  "longaniza-aragon-033": `
-    <h2>Preparación de carnes</h2><hr class="raya">
-    <p>Escoger el magro, la panceta y los recortes limpios y pasarlo a la cámara a −2 °C.</p>
-    <h2>Dosificación masa</h2><hr class="raya">
-    <ul class="lineas">
-      <li><span>3 kg de magro</span><span class="puntos"></span><span class="v">a 0 °C</span></li>
-      <li><span>2 kg de panceta y recortes</span><span class="puntos"></span><span class="v">a −2 °C</span></li>
-      <li><span>0,350 kg de CEYLAMIX n.º 033, o sea, 70 g por kg de masa</span></li>
-      <li><span class="tachado">0,005 de PAKERS POWDER CH-C</span></li>
-    </ul>
-    <p class="aviso">La última línea está tachada a bolígrafo azul en el original. Los kilos de magro y de panceta se leen mal; cuadran con los 0,350 kg de mezcla a 70 g por kilo.</p>
-    <h2>Fabricación</h2><hr class="raya">
-    <p>Picar con placa de 8 o 10 milímetros, mezclándolo, el magro y la panceta y los recortes. Pasarlo a la amasadora y agregarle el CEYLAMIX n.º 033, en forma de papilla hecha con agua fría y un gramo de Jerez por kilo de masa. Amasar durante 5 o 6 minutos al 60 de vacío, si se tiene, y dejar la masa en la cámara a +2 °C durante 24 horas. Transcurrido este tiempo proceder a embutir en tripa china de cerdo, calibre 34-36.</p>
-    <p>A continuación debe colgarse en lugar cerrado o en habitación de estufaje, con temperatura de +18 °C a +20 °C y 85-90 % de humedad, durante 24 horas. Posteriormente pasarlo a lugar más aireado o secadero artificial con humedad relativa del 70-75 %.</p>
-    <p>Debe evitarse toda corriente directa de aire.</p>`
+// Las hojas del proveedor (hojas.js) son listas de bloques; ver la cabecera de ese fichero.
+const linea = ([t, v]) => v === undefined ? `<li><span>${t}</span></li>`
+  : `<li><span>${t}</span><span class="puntos"></span><span class="v">${v}</span></li>`;
+const BLOQUE = {
+  h: t => `<h2>${t}</h2><hr class="raya">`,
+  p: t => `<p>${t}</p>`,
+  l: ls => `<ul class="lineas">${ls.map(linea).join("")}</ul>`,
+  ol: ps => `<ol class="pasos">${ps.map(x => `<li>${x}</li>`).join("")}</ol>`,
+  x: t => `<p class="tachado">${t}</p>`,
+  m: t => `<p class="a-mano"><span class="tinta-azul">${t}</span> <small>· a mano</small></p>`,
+  a: t => `<p class="aviso">${t}</p>`
 };
+const hoja = id => (HOJAS[id] || []).map(([k, v]) => BLOQUE[k](v)).join("");
 
 const fmt = (n, d = 0) => n.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
 const id = new URLSearchParams(location.search).get("r") || "sobrasada";
@@ -57,7 +53,7 @@ const r = RECETAS[i];
 const casa = r.tipo === "casa";
 document.title = `${r.titulo} · Charcutería Padilla`;
 
-const lineas = r.formula.map(([n, p]) =>
+const lineas = (r.formula || []).map(([n, p]) =>
   `<li><span>${n}</span><span class="puntos"></span><span class="v">${p} %</span></li>`).join("");
 
 const cuerpo = casa ? `
@@ -68,7 +64,7 @@ const cuerpo = casa ? `
     <h2>Elaboración <span class="tinta-roja">· tinta roja, en valenciano</span></h2><hr class="raya">
     <p class="nota-roja" lang="ca">«${r.nota}»</p>
     <p class="nota-es">${r.notaEs}</p>
-    ${r.aviso ? `<p class="aviso">${r.aviso}</p>` : ""}` : HOJAS[r.id];
+    ${r.aviso ? `<p class="aviso">${r.aviso}</p>` : ""}` : hoja(r.id);
 
 const e = r.etiqueta && ETIQUETAS[r.etiqueta.n];
 const pegada = e ? `
@@ -87,11 +83,11 @@ const sig = RECETAS[(i + 1) % RECETAS.length];
 document.getElementById("receta").innerHTML = `
   <p class="miga"><a href="index.html">Portada</a> / ${casa ? "Recetas de casa" : "Hojas del proveedor"}</p>
   <div class="cab-receta">
-    <p class="clase">${casa ? "Receta de casa · manuscrito" : `Hoja del proveedor · ${r.gama}`}</p>
+    <p class="clase">${casa ? "Receta de casa · manuscrito" : `Hoja del proveedor${r.gama ? ` · ${r.gama}` : ""}`}</p>
     <h1>${r.titulo}</h1>
   </div>
   <div class="pestanas" role="group" aria-label="Qué ver">
-    <button type="button" data-ver="receta" aria-pressed="true">La receta</button>
+    <button type="button" data-ver="receta" aria-pressed="true">${r.formula ? "La receta" : "El texto"}</button>
     <button type="button" data-ver="papel" aria-pressed="false">El papel</button>
   </div>
   <div class="dos" data-ver="receta">
@@ -104,11 +100,11 @@ document.getElementById("receta").innerHTML = `
     </div>
     <div class="lado-receta">
       <div class="transcrita">${cuerpo}</div>
-      <div class="bascula">
+      ${r.formula ? `<div class="bascula">
         <h2>La báscula</h2>
-        <label>Kilos de masa <input id="kg" type="number" min="0.5" step="0.5" value="5" inputmode="decimal"></label>
+        <label>Kilos de masa${r.base ? ` (${r.base})` : ""} <input id="kg" type="number" min="0.5" step="0.5" value="5" inputmode="decimal"></label>
         <ul class="lineas tique" id="tique" aria-live="polite"></ul>
-      </div>
+      </div>` : ""}
     </div>
   </div>
   <div class="otras">
@@ -122,12 +118,11 @@ function pesar() {
   const fila = (n, v) => `<li><span>${n}</span><span class="puntos"></span><span class="v">${v}</span></li>`;
   document.getElementById("tique").innerHTML =
     r.formula.map(([n, p]) => fila(n, `${fmt(k * p / 100, 2)} kg`)).join("") +
-    fila(casa ? "Aditivos, sal incluida" : "Mezcla de especias", `${fmt(k * r.aditivos)} g`) +
-    (r.extra || []).map(([n, gkg]) => fila(n, `${fmt(k * gkg)} g`)).join("") +
-    `<li class="total"><span>Masa</span><span class="puntos"></span><span class="v">${fmt(k, 2)} kg</span></li>`;
+    fila(casa ? "Aditivos, sal incluida" : (r.mezcla || "Mezcla de especias"), `${fmt(k * r.aditivos)} g`) +
+    (r.extra || []).map(([n, a, b]) => fila(n, `${fmt(k * a)}${b ? `–${fmt(k * b)}` : ""} g`)).join("") +
+    `<li class="total"><span>${r.base ? `Masa (${r.base})` : "Masa"}</span><span class="puntos"></span><span class="v">${fmt(k, 2)} kg</span></li>`;
 }
-kg.addEventListener("input", pesar);
-pesar();
+if (kg) { kg.addEventListener("input", pesar); pesar(); }
 
 const dos = document.querySelector(".dos");
 document.querySelectorAll(".pestanas button").forEach(b => b.addEventListener("click", () => {

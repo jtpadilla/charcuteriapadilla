@@ -107,4 +107,39 @@
 - En `parada9.jpg` (image9), tras la vitrina y de izquierda a derecha: **Juan Padilla Agut, Manuel
   Padilla Julián y Paquita** (Francisca Julián Querol). También es identificación del usuario. El
   usuario escribió «Julian»; se pone la tilde por coherencia con el apellido de la autora.
-- Siguen sin identificar las clientas, los años de todas, y las personas de image2 y 3.
+- En `parada3.jpg` (image3), la mujer que despacha junto a la báscula es **Paquita**. Identificación
+  del usuario.
+- Siguen sin identificar las clientas y los años de todas. En image2 (cabecera) no se ha preguntado
+  aún si sale alguien.
+
+## 2026-11-17 — Transcritas las hojas del proveedor (T-13)
+
+- Transcritas las 14 hojas que faltaban (02 a 15); la 01 ya estaba. Las 15 tienen ficha en la
+  maqueta. El texto está en `maqueta/hojas.js` (lista de bloques por hoja) y la fórmula para la
+  báscula en `maqueta/datos.js`. Lectura provisional, con la ortografía y las unidades normalizadas;
+  las dudas van como aviso en cada ficha y quedan en T-15.
+- La fórmula de la báscula se da en % sobre la masa a la que la hoja refiere la dosis: la carne
+  sola o «carne y agua», según la hoja (campo `base`).
+- La hoja 16 no es una receta: es el programa de un cursillo de Ceylan («CEYLAMIX utilizados en las
+  demostraciones»), con «ABRIL» y los días 21, 22 y 23 (lunes a miércoles) añadidos a mano; el año
+  no consta. Lista 15 productos y 13 de las 15 hojas están en esa lista: las hojas parecen ser el
+  material de ese cursillo (interpretación mía, sin confirmar). Están en la lista y no entre los
+  escaneos: «Jamón y paleta cocida 067» y «Salchicha cruda 921». Está entre los escaneos y no en la
+  lista: la hamburguesa de ave 911, que además es la única con membrete de «Manufacturas Ceylan,
+  S.L.», calle Traginers 6, Valencia. La hoja 06 es el «Fiambre de pavo 066» de la lista; la 13 es
+  la misma hoja 066 rehecha para magro de paleta.
+- Muchas hojas están reaprovechadas: cantidades, números de mezcla y líneas enteras (Pakers Powder,
+  fécula, aglotex) sobrescritos con otra máquina de escribir.
+- Anotaciones a bolígrafo azul, de autor por confirmar: en la 06, «(70 y 75)» sobre la temperatura
+  de cocción y «(Hay que vigilar la t.ª del centro)»; en la 13, «último producto (día siguiente)»
+  junto al aglotex y «[1 o 2 g × kg?] — mix sin sabor (para potenciar el sabor del embutido al
+  gusto)», más dos subrayados; en la 04, una palabra tachada ilegible.
+- Lecturas dudosas o cuentas que no cuadran: 04 (0,350 kg de mezcla para 5 kg son 70 g/kg y la hoja
+  dice 75; fécula «0,100 g»); 07 (Pakers Powder «0'100», veinte veces lo de las demás); 08 (trufa
+  artificial «Blakflaw»); 03 («de 3 a 4 litros de agua fría», sin decir para cuánta masa).
+- Vínculos hoja ↔ etiqueta nuevos, con nombre y dosis coincidentes: Chorizo 043 ↔ etiqueta 09
+  (60 g) y Chorizo lomo 041 ↔ etiqueta 08 (90 g). La etiqueta «Sobrasada 045» no es la mezcla de la
+  hoja «Sobrasada Mallorca 035», ni «Fiambre cocido 611» la de las hojas 066 y 631.
+- `tools/maqueta_img.sh` genera ya las 16 hojas; `maqueta/img/` pasa de 2,6 a 4,0 MB.
+- La hoja 16 tiene también ficha (`receta.html?r=cursillo-ceylamix`), sin fórmula ni báscula: la
+  plantilla admite ahora hojas que no son receta. Cada producto del programa enlaza a su hoja.

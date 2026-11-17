@@ -190,6 +190,11 @@ h2 + .entradilla { margin: 0 0 28px; max-width: 46em; color: var(--tinta-suave);
 .tachado { text-decoration: line-through; text-decoration-color: var(--azul); text-decoration-thickness: 2px; color: var(--tinta-suave); }
 .aviso { font-size: 14px; color: var(--tinta-suave); border-left: 3px solid var(--oro); padding: 2px 0 2px 12px; margin: 18px 0 0; }
 .transcrita p { margin: 0 0 12px; }
+.transcrita .pasos { margin: 0 0 12px; padding-left: 1.6em; }
+.transcrita .pasos li { margin-bottom: 8px; }
+.transcrita .a-mano { font-style: italic; }
+.transcrita .a-mano small { font-style: normal; color: var(--tinta-suave); }
+.transcrita .lineas { margin-bottom: 12px; }
 
 /* la báscula */
 .bascula { margin-top: 30px; background: #fbf7ea; border: 1px solid var(--linea); padding: 18px 20px 16px; }
