@@ -48,7 +48,10 @@ const BLOQUE = {
 const hoja = id => (HOJAS[id] || []).map(([k, v]) => BLOQUE[k](v)).join("");
 
 const fmt = (n, d = 0) => n.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
-const id = new URLSearchParams(location.search).get("r") || "sobrasada";
+// «tarbena» fue una mala lectura de «Tarmena»: se mantiene para no romper los enlaces viejos.
+const ALIAS = { tarbena: "tarmena" };
+const pedido = new URLSearchParams(location.search).get("r") || "sobrasada";
+const id = ALIAS[pedido] || pedido;
 const i = Math.max(0, RECETAS.findIndex(r => r.id === id));
 const r = RECETAS[i];
 const casa = r.tipo === "casa";

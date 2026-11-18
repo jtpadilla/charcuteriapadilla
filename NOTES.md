@@ -53,7 +53,7 @@
   | manual03 | Salchichas (segunda palabra por leer) | receta |
   | manual04 | Chorizo fresco | receta |
   | manual05 | Sobrasada | receta |
-  | manual06 | Título dudoso («Tarbena»?) | receta |
+  | manual06 | Tarmena | receta |
   | manual07 | Longaniza de pascua | receta |
   | manual08 | Morcilla de cebolla | receta |
   | manual09 | Morcilla de arroz | receta |
@@ -77,7 +77,8 @@
   fórmula (tinta azul), la nota de elaboración (tinta roja, en valenciano, con traducción), una
   calculadora por kilos de masa y la etiqueta Ceylan «pegada».
 - Transcripción provisional de las diez recetas de casa (en `datos.js`). Lecturas a confirmar:
-  - `manual06`: título en azul dudoso, con «Tarbena» escrito encima en rojo.
+  - `manual06`: título en azul dudoso, con una palabra escrita encima en rojo. Se leyó «Tarbena»;
+    el usuario confirmó el 2026-11-18 que es **Tarmena**.
   - `manual12` (blanquets): la nota roja dice «el secret de Juan era afegir ous batuts…», en pasado
     y en tercera persona.
 - Etiquetas (9): Fiambre cocido 611 (dos ejemplares), Morcilla de cebolla 091, Salchichas crudas
@@ -85,7 +86,7 @@
   que estaba pegada detrás de la 041).
 - Vínculo receta ↔ etiqueta. Coinciden nombre y dosis: salchichas crudas (40 g), sobrasada (75 g),
   morcillas de cebolla (40 g). Solo coincide la dosis, por confirmar: chorizo fresco ↔ Chorizo lomo
-  041 (90 g); longanizas de pascua y catalana ↔ Longaniza Aragón 033 (70 g); Tarbena ↔ Sobrasada
+  041 (90 g); longanizas de pascua y catalana ↔ Longaniza Aragón 033 (70 g); Tarmena ↔ Sobrasada
   045 (75 g). Morcillas de arroz, morcilla negra y blanquets no tienen etiqueta entre las escaneadas.
 - Hojas del proveedor (16): títulos leídos solo de la cabecera, listados en `datos.js`. Transcrita
   entera solo la 01 (Longaniza Aragón 033). La 16 no es una receta: es la hoja de un cursillo.
