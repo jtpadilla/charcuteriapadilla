@@ -232,6 +232,7 @@ h2 + .entradilla { margin: 0 0 28px; max-width: 46em; color: var(--tinta-suave);
 footer { margin-top: 64px; background: var(--granate); color: #f3dfc0; border-top: 4px solid var(--oro); font-size: 14px; }
 footer .caja { padding-top: 22px; padding-bottom: 26px; }
 footer p { margin: 0 0 6px; max-width: 60em; }
+footer a { color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }

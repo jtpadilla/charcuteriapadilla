@@ -6,7 +6,8 @@
 - **T-03** Licencia: el material propio, como los hermanos (CC BY-NC-ND 4.0 + MIT para el código);
   decidir qué hacer con las recetas del proveedor y las etiquetas de los fabricantes.
 - **T-05** Idiomas del sitio (castellano, valenciano o los dos) y modelo de datos de una receta.
-- **T-06** Añadir el proyecto a la portada franciscajulianquerol (ver su «Cómo añadir un proyecto»).
+- ~~**T-06**~~ Hecho el 2026-11-18: el proyecto tiene ficha en la portada (su T-14) y el pie de las
+  tres páginas enlaza a franciscajulianquerol.es.
 - **T-07** Revisar en franciscaineditos las obras C19 y C22 por si hay material relacionado.
 - **T-08** Preguntar: nombre comercial de la charcutería, lugar y años de actividad.
 - **T-09** Fotos de la parada (`raw/FotosParada/`): preguntar quién sale y de qué año son las que no
