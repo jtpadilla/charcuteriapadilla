@@ -51,8 +51,8 @@ const fmt = (n, d = 0) => n.toLocaleString("es-ES", { minimumFractionDigits: d, 
 // «tarbena» fue una mala lectura de «Tarmena»: se mantiene para no romper los enlaces viejos.
 const ALIAS = { tarbena: "tarmena" };
 const pedido = new URLSearchParams(location.search).get("r") || "sobrasada";
-const id = ALIAS[pedido] || pedido;
-const i = Math.max(0, RECETAS.findIndex(r => r.id === id));
+const busca = x => RECETAS.findIndex(r => r.id === x);
+const i = Math.max(0, busca(pedido) >= 0 ? busca(pedido) : busca(ALIAS[pedido]));
 const r = RECETAS[i];
 const casa = r.tipo === "casa";
 document.title = `${r.titulo} · Charcutería Padilla`;
